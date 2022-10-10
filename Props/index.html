@@ -7,23 +7,39 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn ({banana, big}) {   //{banana}=props.banana
-      console.log(banana, big);
+    function Btn({ banana, changeValue }) {
+      //{banana}=props.banana
+      console.log(banana, "was rendered");
       return (
-        <button style={{backgroundColor: "tomato", color:"white", padding:"10px 20px", border:0, borderRadius: 10, fontsize: big ? 18 : 36,}}>{banana}</button>);  //banana
+        <button
+          onClick={changeValue}
+          style={{
+            backgroundColor: "tomato",
+            color: "white",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            fontsize: 16,
+          }}
+        >
+          {banana}
+        </button>
+      ); //banana
     }
-    
+
     const root = document.getElementById("root");
 
+    const MemorizedBtn = React.memo(Btn)
     function App() {
-
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-         <Btn banana="Save Changes" big={false}/>
-         <Btn banana="Continue" big={true}/>
+          <MemorizedBtn banana={value} changeValue={changeValue} />
+          <MemorizedBtn banana="Continue" />
         </div>
       );
-    } 
+    }
     ReactDOM.render(<App />, root);
   </script>
 </html>
