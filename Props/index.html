@@ -7,13 +7,20 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+    function Btn ({banana, big}) {   //{banana}=props.banana
+      console.log(banana, big);
+      return (
+        <button style={{backgroundColor: "tomato", color:"white", padding:"10px 20px", border:0, borderRadius: 10, fontsize: big ? 18 : 36,}}>{banana}</button>);  //banana
+    }
+    
     const root = document.getElementById("root");
 
     function App() {
 
       return (
         <div>
-         
+         <Btn banana="Save Changes" big={false}/>
+         <Btn banana="Continue" big={true}/>
         </div>
       );
     } 
